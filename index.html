@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <base target="_blank">
+  <title>replaceable-media-recorder</title>
+  <link rel="stylesheet" href="./public/css/main.css" />
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+</head>
+
+<body>
+  <div id="container" class="all">
+    <audio id="firstAudio" src="./public/resource/audio/StarWars60.wav"></audio>
+    <audio id="secondAudio" src="./public/resource/audio/PinkPanther60.wav"></audio>
+    <audio id="thirdAudio" src="./public/resource/audio/ImperialMarch60.wav"></audio>
+    <video id="localVideo" src="./public/resource/video/big_buck_bunny.mp4" playsinline autoplay muted style="display: none;"></video>
+    <video id="remoteVideo" playsinline autoplay muted controls></video>
+    <video id="recordVideo" playsinline autoplay></video>
+    <div class="box">
+      <button id="micAudioButton" disabled>Audio MIC OFF</button>
+      <button id="firstAudioButton" disabled>Audio #1 OFF</button>
+      <button id="secondAudioButton" disabled>Audio #2 OFF</button>
+      <button id="thirdAudioButton" disabled>Audio #3 OFF</button>
+      <br>
+      <br>
+      <button id="camVideoButton" disabled>Video CAM</button>
+      <button id="screenVideoButton" disabled>Video Screen</button>
+      <button id="sampleVideoButton" disabled>Video Sample</button>
+      <button id="noiseVideoButton" disabled>Video Noise</button>
+      <br>
+      <br>
+      <button id="recordStartButton" disabled>Start Record</button>
+      <button id="recordStopButton" disabled>Stop Record</button>
+      <button id="playButton" disabled>Play</button>
+      <button id="downloadButton" disabled>Download</button>
+    </div>
+  </div>
+  <script type="module" src="./public/js/main.js"></script>
+</body>
+
+</html>
