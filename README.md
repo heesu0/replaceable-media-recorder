@@ -14,37 +14,37 @@ const webRecorder = new WebRecorder();
 
 ```js
 try {
-	await webRecorder.start();
+  await webRecorder.start();
 } catch (error) {
-	console.log(error);
+  console.log(error);
 }
 
 or
 
 try {
-	await webRecorder.start(stream);
+  await webRecorder.start(stream);
 } catch (error) {
-	console.log(error);
+  console.log(error);
 }
 
 or
 
 webRecorder.start()
 .then(function () {
-	// do something
+  // do something
 })
 .catch(function (error) {
-	console.log(error);
+  console.log(error);
 });
 
 or
 
 webRecorder.start(stream)
 .then(function () {
-	// do something
+  // do something
 })
 .catch(function (error) {
-	console.log(error);
+  console.log(error);
 });
 
 ```
@@ -54,20 +54,20 @@ webRecorder.start(stream)
 
 ```js
 try {
-	await webRecorder.start();
-	video.srcObject = webRecorder.getRecordedStream();
+  await webRecorder.start();
+  video.srcObject = webRecorder.getRecordedStream();
 } catch (error) {
-	console.log(error);
+  console.log(error);
 }
 
 or
 
 webRecorder.start()
 .then(function () {
-	video.srcObject = webRecorder.getRecordedStream();
+  video.srcObject = webRecorder.getRecordedStream();
 })
 .catch(function (error) {
-	console.log(error);
+  console.log(error);
 });
 ```
 
