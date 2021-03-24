@@ -9,6 +9,7 @@ const webRecorder = new WebRecorder();
 
 ### Methods
 
+
 #### WebRecorder.start(stream? : MediaStream) : Promise<void>
 - Start recording
 
@@ -49,6 +50,7 @@ webRecorder.start(stream)
 
 ```
 
+
 #### WebRecorder.getRecordedStream() : MediaStream
 - Get recorded MediaStream while recording
 
@@ -71,6 +73,7 @@ webRecorder.start()
 });
 ```
 
+
 #### WebRecorder.addAudioTrack(audioTrack : MediaStreamTrack) : void
 - Add audio track while recording
 
@@ -81,6 +84,7 @@ or
 
 webRecorder.addAudioTrack(audioTrack);
 ```
+
 
 #### WebRecorder.deleteAudioTrack(audioTrack : MediaStreamTrack) : void
 - Delete audio track while recording
@@ -93,6 +97,7 @@ or
 webRecorder.deleteAduioTrack(audioTrack);
 ```
 
+
 #### WebRecorder.replaceVideoTrack(videoTrack : MediaStreamTrack) : void
 - Replace video track while recording
 
@@ -104,6 +109,7 @@ or
 webRecorder.replaceVideoTrack(videoTrack);
 ```
 
+
 #### WebRecorder.replaceStream(stream : MediaStream) : void
 - Replace MediaStream while recording
 
@@ -111,12 +117,14 @@ webRecorder.replaceVideoTrack(videoTrack);
 webRecorder.replaceStream(stream);
 ```
 
-### WebRecorder.stop() : void
+
+#### WebRecorder.stop() : void
 - Stop recording
 
 ```js
 webRecorder.stop();
 ```
+
 
 #### WebRecorder.getRecordedBlob() : Blob 
 - Get recorded BLOB
@@ -124,6 +132,7 @@ webRecorder.stop();
 ```js
 const blob = webRecorder.getRecordedBlob();
 ```
+
 
 #### WebRecorder.download(fileName? : string) : void
 - Download recorded File
