@@ -3,6 +3,7 @@
 import WebRecorder from './WebRecorder.js'
 import FakeStreamFactory from './FakeStreamFactory.js'
 
+const localVideo = document.getElementById("localVideo");
 const firstAudio = document.getElementById('firstAudio');
 const secondAudio = document.getElementById('secondAudio');
 const thirdAudio = document.getElementById('thirdAudio');
@@ -147,6 +148,7 @@ async function replaceCamVideo() {
   }
 
   camVideoStream = await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+  //webRecorder.replaceStream(camVideoStream);
   webRecorder.replaceVideoTrack(camVideoStream.getVideoTracks()[0]);
 }
 
@@ -175,9 +177,8 @@ async function replacesampleVideo() {
     return;
   }
 
-  const video = document.getElementById("localVideo");
-  video.play();
-  sampleVideoStream = video.captureStream();
+  localVideo.play();
+  sampleVideoStream = localVideo.captureStream();
   webRecorder.replaceVideoTrack(sampleVideoStream.getVideoTracks()[0]);
 }
 
@@ -197,6 +198,13 @@ function replaceNoiseVideo() {
   noiseVideoTrack = fakeStreamFactory.getFakeVideoTrack(option);
   webRecorder.replaceVideoTrack(noiseVideoTrack);
 }
+
+
+/****************************************************
+  Button Part
+****************************************************/
+
+
 
 function disableVideoBackground() {
   camVideoButton.style.background = '';
@@ -247,26 +255,51 @@ function reset() {
   firstAudio.pause();
   secondAudio.pause();
   thirdAudio.pause();
+  localVideo
 
+  micAudioButton.style.background = '';
   firstAudioButton.style.background = '';
   secondAudioButton.style.background = '';
   thirdAudioButton.style.background = '';
 
+  micAudioButton.textContent = 'Audio MIC OFF';
   firstAudioButton.textContent = 'Audio #1 OFF';
   secondAudioButton.textContent = 'Audio #2 OFF';
   thirdAudioButton.textContent = 'Audio #3 OFF';
 
+  micAudioStream = null;
+  firstAudioStream = null;
+  secondAudioStream = null;
+  thirdAudioStream = null;
+
+  camVideoStream = null;
+  screenVideoStream = null;
+  sampleVideoStream = null;
+  noiseVideoTrack = null;
+
   disableVideoBackground();
 }
 
+/****************************************************
+  Record Part
+****************************************************/
+
 async function startRecording() {
-  try {
+  webRecorder.start()
+    .then(function () {
+      remoteVideo.srcObject = webRecorder.getRecordedStream();
+    })
+    .catch(function (error) {
+      console.log(error);
+      return;
+    });
+  /*try {
     await webRecorder.start();
     remoteVideo.srcObject = webRecorder.getRecordedStream();
   } catch (error) {
     console.log(error);
     return;
-  }
+  }*/
 
   recordStartButton.style.background = "red";
   recordStartButton.style.color = "black";

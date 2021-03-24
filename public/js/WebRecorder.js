@@ -13,8 +13,8 @@ export default function WebRecorder() {
   const sourceNodeMap = new Map();
   let audioContext = null;
   let audioDestination = null;
-  // Connection problems if local variable
-  let muteSourceNode = null;
+  // Connection problems if mutedSourceNode is a local variable
+  let mutedSourceNode = null;
 
   // Recording Part
   let mediaRecorder = null;
@@ -91,16 +91,37 @@ export default function WebRecorder() {
     }
   }
 
-  /*this.replaceAudioTrack = function (track) {
+  this.replaceStream = (stream) => {
     if (!isRecording) {
       console.error('Recording is not in progress');
       return;
     }
 
-    if (track.kind === 'audio') {
-      mediaStreamProxy.replaceAudioTrack(track);
+    if (!(stream instanceof MediaStream)) {
+      console.error('Invalid arugment');
+      return;
     }
-  }*/
+
+    clearAudioTrack();
+
+    stream.getTracks().forEach((track) => {
+      if (track.kind === 'video') {
+        mediaStreamProxy.replaceVideoTrack(track);
+      } else if (track.kind === 'audio') {
+        const trackID = track.id;
+        if (sourceNodeMap.has(trackID)) {
+          return;
+        }
+
+        const audioStream = new MediaStream();
+        audioStream.addTrack(track);
+
+        const sourceNode = audioContext.createMediaStreamSource(audioStream);
+        sourceNode.connect(audioDestination);
+        sourceNodeMap.set(trackID, sourceNode);
+      }
+    });
+  }
 
   this.getRecordedStream = () => {
     if (!isRecording) {
@@ -270,8 +291,8 @@ export default function WebRecorder() {
     audioDestination = audioContext.createMediaStreamDestination();
 
     // default AudioSourceNode
-    muteSourceNode = audioContext.createBufferSource();
-    muteSourceNode.connect(audioDestination);
+    mutedSourceNode = audioContext.createBufferSource();
+    mutedSourceNode.connect(audioDestination);
 
     stream.getTracks().filter((track) => {
       return track.kind === 'audio';
@@ -292,6 +313,12 @@ export default function WebRecorder() {
     return audioDestination.stream.getAudioTracks()[0];
   }
 
+  function clearAudioTrack() {
+    sourceNodeMap.forEach((sourceNode) => {
+      sourceNode.disconnect();
+    });
+    sourceNodeMap.clear();
+  }
 
   function resetVideoProcess() {
     fakeStreamFactory.releaseFakeStream();
@@ -305,9 +332,9 @@ export default function WebRecorder() {
     });
     sourceNodeMap.clear();
 
-    if (muteSourceNode) {
-      muteSourceNode.disconnect();
-      muteSourceNode = null;
+    if (mutedSourceNode) {
+      mutedSourceNode.disconnect();
+      mutedSourceNode = null;
     }
 
     if (audioDestination) {
