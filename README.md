@@ -10,7 +10,7 @@ const webRecorder = new WebRecorder();
 ### Methods
 
 
-#### WebRecorder.start(stream? : MediaStream) : Promise<void>
+#### WebRecorder.start(stream? : MediaStream) : Promise`<void>`
 - Start recording
 
 ```js
