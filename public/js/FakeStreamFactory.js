@@ -7,7 +7,7 @@ export default function FakeStreamFactory() {
   const context = canvas.getContext('2d');
   let isStopDrawingFrames = false;
 
-  this.getFakeVideoTrack = function (option) {
+  this.getFakeVideoTrack = (option) => {
     option = option || {
       videoType: 'black' || 'noise' || 'image'
     }
@@ -27,7 +27,7 @@ export default function FakeStreamFactory() {
     return videoTrack;
   }
 
-  this.releaseFakeStream = function () {
+  this.releaseFakeStream = () => {
     isStopDrawingFrames = true;
 
     context.clearRect(0, 0, canvas.width, canvas.height);

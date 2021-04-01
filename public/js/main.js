@@ -156,12 +156,9 @@ async function replaceScreenVideo() {
   disableVideoBackground();
   screenVideoButton.style.background = 'blue';
 
-  if (screenVideoStream) {
-    webRecorder.replaceVideoTrack(screenVideoStream.getVideoTracks()[0]);
-    return;
-  }
-
   screenVideoStream = await navigator.mediaDevices.getDisplayMedia({ audio: false, video: true });
+  console.log(screenVideoStream.getVideoTracks()[0].getSettings().width);
+  console.log(screenVideoStream.getVideoTracks()[0].getSettings().height);
   screenVideoStream.getVideoTracks()[0].onended = () => {
     screenVideoStream = null;
   };
@@ -195,7 +192,10 @@ function replaceNoiseVideo() {
   const option = {
     videoType: "noise"
   }
+  
   noiseVideoTrack = fakeStreamFactory.getFakeVideoTrack(option);
+  //noiseVideoTrack.enabled = false;
+  //console.log(noiseVideoTrack);
   webRecorder.replaceVideoTrack(noiseVideoTrack);
 }
 
@@ -207,6 +207,10 @@ function replaceNoiseVideo() {
 
 
 function disableVideoBackground() {
+  if (screenVideoStream) {
+    screenVideoStream.getTracks().forEach((track) => track.stop());
+    screenVideoStream = null;
+  }
   camVideoButton.style.background = '';
   screenVideoButton.style.background = '';
   sampleVideoButton.style.background = '';
@@ -285,7 +289,8 @@ function reset() {
 ****************************************************/
 
 async function startRecording() {
-  webRecorder.start()
+  camVideoStream = await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+  webRecorder.start(camVideoStream)
     .then(function () {
       remoteVideo.srcObject = webRecorder.getRecordedStream();
     })

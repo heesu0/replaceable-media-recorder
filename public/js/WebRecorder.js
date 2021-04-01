@@ -1,13 +1,15 @@
 'use strict'
 
+import CanvasStreamProxy from './CanvasStreamProxy.js';
 import FakeStreamFactory from './FakeStreamFactory.js';
-import MediaStreamProxy from './MediaStreamProxy.js'
+import MediaStreamProxy from './MediaStreamProxy.js';
 
 export default function WebRecorder() {
 
   // Video Part
   const fakeStreamFactory = new FakeStreamFactory();
   const mediaStreamProxy = new MediaStreamProxy();
+  const canvasStreamProxy = new CanvasStreamProxy();
 
   // Audio Part
   const sourceNodeMap = new Map();
@@ -87,7 +89,10 @@ export default function WebRecorder() {
     }
 
     if (track.kind === 'video') {
-      mediaStreamProxy.replaceVideoTrack(track);
+      const stream = new MediaStream();
+      stream.addTrack(track);
+      canvasStreamProxy.replaceVideoStream(stream);
+      //mediaStreamProxy.replaceVideoTrack(track);
     }
   }
 
@@ -262,14 +267,16 @@ export default function WebRecorder() {
       stream.addTrack(fakeVideoTrack);
     }
 
-    let videoTrack;
+    /*let videoTrack;
     try {
       videoTrack = await processVideoTrack(stream);
     } catch (error) {
       return Promise.reject(error);
-    }
-
+    }*/
+    
+    const videoTrack = canvasStreamProxy.createCanvasStream(stream);
     const audioTrack = processAudioTrack(stream);
+
     const resultStream = new MediaStream();
     resultStream.addTrack(videoTrack);
     resultStream.addTrack(audioTrack);
@@ -322,7 +329,8 @@ export default function WebRecorder() {
 
   function resetVideoProcess() {
     fakeStreamFactory.releaseFakeStream();
-    mediaStreamProxy.disconnectLocalConnection();
+    //mediaStreamProxy.disconnectLocalConnection();
+    canvasStreamProxy.releaseCanvasStream();
   }
 
   function resetAudioProcess() {
