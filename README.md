@@ -37,7 +37,7 @@ Let's talk about how to solve this problems separately by audio and video.
 We have two constraints recording audio.
 
 1. MediaRecorder can record only one audio track.
-2. MediaRecorder cannot add, remove or replace audio tracks during recording.
+2. MediaRecorder cannot add, remove and replace audio tracks during recording.
 
 __We can use the [Web Audio API](https://www.w3.org/TR/webaudio/) to solve this problem.__
 
