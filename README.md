@@ -20,7 +20,8 @@ Demo
 -------------
 
 
-### 1.1 Problems
+1.1 Problems
+-------------
 
 We have some problems for recording with [MediaRecorder API](https://w3c.github.io/mediacapture-record/#mediarecorder-api).
 
@@ -30,7 +31,8 @@ We have some problems for recording with [MediaRecorder API](https://w3c.github.
 Let's talk about how to solve this problems separately by audio and video.
 
 
-### 1.2 Audio Recording
+1.2 Audio Recording
+-------------
 
 We have two constraints recording audio.
 
@@ -47,7 +49,8 @@ Using the Web Audio API
 
 The reason for adding a null source node is to allow recording of silent data even if the Destination Node and other Source Nodes are disconnected.
 
-### 1.3 Video Recording
+1.3 Video Recording
+-------------
 
 We have two constraints recording audio.
 
