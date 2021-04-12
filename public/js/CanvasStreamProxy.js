@@ -4,8 +4,10 @@ export default function CanvasStreamProxy() {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
   const video = document.createElement('video');
-  const webWorker = new Worker('./public/js/CanvasWorker.js');
   let isCanvasUpdating = false;
+
+  //init Web Worker
+  const webWorker = createWebWorker();
 
   this.createCanvasStream = (stream) => {
     if (isCanvasUpdating) {
@@ -91,9 +93,6 @@ export default function CanvasStreamProxy() {
         return;
       }
       context.drawImage(video, 0, 0, video.width, video.height);
-      /*setTimeout(() => {
-        drawImage();
-      }, 33);*/
     }
 
     webWorker.postMessage('start');
@@ -101,10 +100,33 @@ export default function CanvasStreamProxy() {
       drawImage();
     };
 
-    //drawImage();
     const stream = canvas.captureStream(25);
     canvas.stream = stream;
 
     return stream.getVideoTracks()[0];
+  }
+
+  function createWebWorker() {
+    let blob = new Blob(["(" + getWebWorkerCode.toString() + ")()"], { type: "text/javascript" });
+    const worker = new Worker(window.URL.createObjectURL(blob));
+
+    return worker;
+  }
+
+  // this code run in background thread
+  function getWebWorkerCode() {
+    let handle;
+    const workerContext = self;
+
+    workerContext.addEventListener('message', (e) => {
+      const msg = e.data;
+      if (msg === 'start') {
+        handle = setInterval(() => workerContext.postMessage('message'), 33);
+      } else if (msg === 'end') {
+        if (handle !== undefined) {
+          clearInterval(handle);
+        }
+      }
+    });
   }
 }
