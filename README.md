@@ -5,7 +5,7 @@ replaceable-media-recorder
 
 `replaceable-media-recorder` is a [MediaRecorder API](https://w3c.github.io/mediacapture-record/#mediarecorder-api) Library written in JavaScript for add, remove and replace tracks during recording.
 
-With `replace-media-recorder`
+With `replaceable-media-recorder`
 1. Audio tracks can be added, removed and replaced during recording.
 2. Video tracks can be replaced during recording.
 
