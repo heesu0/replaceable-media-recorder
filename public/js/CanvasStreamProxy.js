@@ -68,7 +68,6 @@ export default function CanvasStreamProxy() {
 
     video.pause();
     video.srcObject.getTracks().forEach((track) => track.stop());
-    console.log(video.srcObject.getTracks());
   }
 
 

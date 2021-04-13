@@ -157,8 +157,6 @@ async function replaceScreenVideo() {
   screenVideoButton.style.background = 'blue';
 
   screenVideoStream = await navigator.mediaDevices.getDisplayMedia({ audio: false, video: true });
-  console.log(screenVideoStream.getVideoTracks()[0].getSettings().width);
-  console.log(screenVideoStream.getVideoTracks()[0].getSettings().height);
   screenVideoStream.getVideoTracks()[0].onended = () => {
     screenVideoStream = null;
   };
@@ -194,8 +192,6 @@ function replaceNoiseVideo() {
   }
   
   noiseVideoTrack = fakeStreamFactory.getFakeVideoTrack(option);
-  //noiseVideoTrack.enabled = false;
-  //console.log(noiseVideoTrack);
   webRecorder.replaceVideoTrack(noiseVideoTrack);
 }
 
@@ -290,6 +286,7 @@ function reset() {
 
 async function startRecording() {
   camVideoStream = await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+
   webRecorder.start(camVideoStream)
     .then(function () {
       remoteVideo.srcObject = webRecorder.getRecordedStream();
@@ -298,6 +295,7 @@ async function startRecording() {
       console.log(error);
       return;
     });
+    
   /*try {
     await webRecorder.start();
     remoteVideo.srcObject = webRecorder.getRecordedStream();

@@ -7,16 +7,22 @@
   <meta name="mobile-web-app-capable" content="yes">
   <base target="_blank">
   <title>replaceable-media-recorder</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./public/css/main.css" />
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 </head>
 
 <body>
   <div id="container" class="all">
+    <h1>
+      <a href="https://github.com/Choi-Heesu/replaceable-media-recorder">replaceable-media-recorder</a>
+    </h1>
     <audio id="firstAudio" src="./public/resource/audio/StarWars60.wav"></audio>
     <audio id="secondAudio" src="./public/resource/audio/PinkPanther60.wav"></audio>
     <audio id="thirdAudio" src="./public/resource/audio/ImperialMarch60.wav"></audio>
-    <video id="localVideo" src="./public/resource/video/big_buck_bunny.mp4" playsinline autoplay muted style="display: none;"></video>
+    <video id="localVideo" src="./public/resource/video/sample_video.mp4" playsinline autoplay muted
+      style="display: none;"></video>
     <video id="remoteVideo" playsinline autoplay muted controls></video>
     <video id="recordVideo" playsinline autoplay></video>
     <div class="box">
