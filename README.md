@@ -219,3 +219,9 @@ or
 
 webRecorder.download();
 ```
+
+Resources
+-----------
+
+https://www2.cs.uic.edu/~i101/SoundFiles/    
+https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4
