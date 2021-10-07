@@ -220,6 +220,7 @@ or
 webRecorder.download();
 ```
 
+
 Resources
 -----------
 
