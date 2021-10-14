@@ -15,17 +15,6 @@ Demo
 [Demo Link](https://choi-heesu.github.io/)
 
 
-Usage
--------------
-It can be tested in a local environment through `npm install` and `npm start`
-```
-$ git clone https://github.com/Choi-Heesu/replaceable-media-recorder.git
-
-$ npm install
-$ npm start
-```
-open http://localhost:3000 in broswer
-
 1.Description
 -------------
 
@@ -229,6 +218,18 @@ or
 
 webRecorder.download();
 ```
+
+
+Usage
+-------------
+It can be tested in a local environment through `npm install` and `npm start`
+```
+$ git clone https://github.com/Choi-Heesu/replaceable-media-recorder.git
+
+$ npm install
+$ npm start
+```
+open http://localhost:3000 in broswer
 
 
 Resources
