@@ -168,7 +168,7 @@ webRecorder.deleteAudioTrack(stream.getAudioTracks()[0]);
 
 or
 
-webRecorder.deleteAduioTrack(audioTrack);
+webRecorder.deleteAudioTrack(audioTrack);
 ```
 
 
