@@ -2,7 +2,7 @@
 
 export default function FakeStreamFactory() {
 
-  const DEFAULT_IMAGE = "http://localhost:3000/public/resource/image/src_resource_svg_Profile_empty_quit.svg";
+  const DEFAULT_IMAGE = "https://choi-heesu.github.io/public/resource/image/src_resource_svg_Profile_empty_quit.svg";
   const canvas = document.createElement("canvas");
   const context = canvas.getContext('2d');
   let isStopDrawingFrames = false;
