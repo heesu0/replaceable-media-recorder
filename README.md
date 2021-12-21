@@ -12,7 +12,7 @@ With `replaceable-media-recorder`
 
 Demo
 -------------
-[Demo Link](https://choi-heesu.github.io/)
+[Demo Link](https://choi-heesu.github.io/replaceable-media-recorder/)
 
 
 1.Description
