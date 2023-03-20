@@ -12,7 +12,7 @@ With `replaceable-media-recorder`
 
 Demo
 -------------
-[Demo Link](https://choi-heesu.github.io/replaceable-media-recorder/)
+[Demo Link](https://heesu0.github.io/replaceable-media-recorder/)
 
 
 1.Description
@@ -224,7 +224,7 @@ Usage
 -------------
 It can be tested in a local environment through `npm install` and `npm start`
 ```
-$ git clone https://github.com/Choi-Heesu/replaceable-media-recorder.git
+$ git clone https://github.com/heesu0/replaceable-media-recorder.git
 
 $ npm install
 $ npm start
